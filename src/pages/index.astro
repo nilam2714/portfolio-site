@@ -1,0 +1,108 @@
+---
+import Base from '../layouts/Base.astro';
+
+const email = 'nilam2714@gmail.com';
+
+const services = [
+  { title: 'WordPress Development', text: 'Custom builds, rebuilds and migrations, with clean code that is easy to update.' },
+  { title: 'Divi', text: 'Theme Builder templates, custom modules and pixel-matched layouts.' },
+  { title: 'Kadence', text: 'Lightweight, fast Kadence sites and reusable block patterns.' },
+  { title: 'Elementor', text: 'Responsive Elementor pages, templates and landing pages.' },
+  { title: 'WooCommerce', text: 'Store setup, product options, subscriptions and checkout fixes.' },
+  { title: 'SEO', text: 'On-page SEO, image optimization, schema, redirects and indexing.' },
+];
+
+const projects = [
+  {
+    client: 'Clayton',
+    title: 'Clayton Project',
+    text: 'WordPress design and development, landing pages and ongoing SEO work.',
+    tags: ['WordPress', 'Landing pages', 'SEO'],
+  },
+];
+---
+<Base>
+  <header class="nav wrap">
+    <a href="/" class="logo">Neelam</a>
+    <nav>
+      <a href="#services">Services</a>
+      <a href="#work">Work</a>
+      <a href="#contact" class="btn small">Hire me</a>
+    </nav>
+  </header>
+
+  <section class="hero wrap">
+    <p class="eyebrow">WordPress developer &amp; designer</p>
+    <h1>I build WordPress sites that load fast, rank well and are easy to run.</h1>
+    <p class="lead">Divi, Kadence, Elementor and WooCommerce, from first layout to SEO-ready launch.</p>
+    <div class="cta">
+      <a class="btn" href={`mailto:${email}`}>Email me</a>
+      <a class="btn ghost" href="#work">See my work</a>
+    </div>
+  </section>
+
+  <section id="services" class="wrap block">
+    <h2>Services</h2>
+    <div class="grid">
+      {services.map((s) => (
+        <article class="card">
+          <h3>{s.title}</h3>
+          <p>{s.text}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section id="work" class="wrap block">
+    <h2>Selected work</h2>
+    <div class="grid">
+      {projects.map((p) => (
+        <article class="card project">
+          <p class="eyebrow">{p.client}</p>
+          <h3>{p.title}</h3>
+          <p>{p.text}</p>
+          <ul class="tags">{p.tags.map((t) => <li>{t}</li>)}</ul>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section id="contact" class="wrap block contact">
+    <h2>Have a project in mind?</h2>
+    <p class="lead">Tell me what you need and I'll get back to you.</p>
+    <a class="btn" href={`mailto:${email}`}>{email}</a>
+  </section>
+
+  <footer class="wrap foot">
+    <p>© {new Date().getFullYear()} Neelam. Built with Astro, hosted on Cloudflare.</p>
+  </footer>
+</Base>
+
+<style>
+  .nav { display: flex; justify-content: space-between; align-items: center; padding-top: 24px; padding-bottom: 24px; }
+  .logo { font-family: 'Fraunces', serif; font-weight: 700; font-size: 24px; text-decoration: none; }
+  nav { display: flex; gap: 20px; align-items: center; }
+  nav a { text-decoration: none; color: var(--muted); font-weight: 500; }
+  nav a:hover { color: var(--ink); }
+  .hero { padding-top: 72px; padding-bottom: 88px; }
+  .hero h1 { font-size: clamp(38px, 6vw, 68px); max-width: 15ch; }
+  .eyebrow { color: var(--accent); font-weight: 600; font-size: 14px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 14px; }
+  .lead { color: var(--muted); font-size: 20px; max-width: 46ch; margin-top: 20px; }
+  .cta { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
+  .btn { display: inline-block; background: var(--accent); color: #fff !important; padding: 14px 24px; border-radius: 999px; text-decoration: none; font-weight: 600; border: 2px solid var(--accent); }
+  .btn:hover { filter: brightness(1.08); }
+  .btn.ghost { background: transparent; color: var(--ink) !important; border-color: var(--line); }
+  .btn.small { padding: 8px 16px; font-size: 15px; }
+  .block { padding-top: 64px; padding-bottom: 64px; border-top: 1px solid var(--line); }
+  .block h2 { font-size: clamp(30px, 4vw, 44px); margin-bottom: 32px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 28px; }
+  .card h3 { font-size: 22px; margin-bottom: 10px; }
+  .card p { color: var(--muted); }
+  .tags { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .tags li { font-size: 13px; background: var(--bg); border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; }
+  .contact { text-align: center; }
+  .contact .lead { margin: 0 auto 28px; }
+  .foot { padding-top: 32px; padding-bottom: 40px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); }
+  @media (max-width: 560px) { nav a:not(.btn) { display: none; } .hero { padding-top: 40px; } }
+</style>
