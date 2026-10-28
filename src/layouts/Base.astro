@@ -1,5 +1,10 @@
 ---
-const { title = 'Neelam — WordPress Developer & Designer', description = 'Neelam builds fast, SEO-ready WordPress sites with Divi, Kadence, Elementor and WooCommerce.' } = Astro.props;
+import '@fontsource/gloock/400.css';
+import '@fontsource-variable/figtree/wght.css';
+const {
+  title = 'Neelam | WordPress developer & designer',
+  description = 'I design and build fast, search-ready WordPress sites on Divi, Kadence, Elementor and WooCommerce, and look after them once they are live.',
+} = Astro.props;
 ---
 <!doctype html>
 <html lang="en">
@@ -8,10 +13,10 @@ const { title = 'Neelam — WordPress Developer & Designer', description = 'Neel
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta name="theme-color" content="#0E1A3D" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   </head>
   <body>
     <slot />
@@ -20,17 +25,29 @@ const { title = 'Neelam — WordPress Developer & Designer', description = 'Neel
 
 <style is:global>
   :root {
-    --bg: #faf7f2;
-    --ink: #1c1a17;
-    --muted: #6b655c;
-    --line: #e6dfd3;
-    --accent: #c2410c;
-    --card: #ffffff;
+    --night: #0E1A3D;
+    --night-2: #16255A;
+    --sapphire: #2445D6;
+    --facet: #7FA2FF;
+    --paper: #F3F5FB;
+    --ink: #10142A;
+    --slate: #4A5275;
+    --rule: #D8DDEE;
+    --gold: #D9A441;
+    --display: 'Gloock', 'Georgia', serif;
+    --body: 'Figtree Variable', 'Figtree', system-ui, sans-serif;
   }
-  * { box-sizing: border-box; margin: 0; }
-  html { scroll-behavior: smooth; }
-  body { background: var(--bg); color: var(--ink); font: 17px/1.6 'Inter', system-ui, sans-serif; }
-  h1, h2, h3 { font-family: 'Fraunces', Georgia, serif; line-height: 1.1; font-weight: 700; }
+  *, *::before, *::after { box-sizing: border-box; }
+  * { margin: 0; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body { background: var(--paper); color: var(--ink); font: 400 1.0625rem/1.65 var(--body); overflow-x: hidden; }
+  h1, h2, h3 { font-family: var(--display); font-weight: 400; line-height: 1.04; letter-spacing: -0.01em; }
   a { color: inherit; }
-  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+  img, svg { display: block; max-width: 100%; }
+  :focus-visible { outline: 3px solid var(--facet); outline-offset: 3px; border-radius: 4px; }
+  .wrap { width: min(1160px, 100% - 32px); margin-inline: auto; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  }
 </style>

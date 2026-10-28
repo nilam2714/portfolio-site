@@ -1,108 +1,520 @@
 ---
 import Base from '../layouts/Base.astro';
+import Mark from '../components/Mark.astro';
 
 const email = 'nilam2714@gmail.com';
 
 const services = [
-  { title: 'WordPress Development', text: 'Custom builds, rebuilds and migrations, with clean code that is easy to update.' },
-  { title: 'Divi', text: 'Theme Builder templates, custom modules and pixel-matched layouts.' },
-  { title: 'Kadence', text: 'Lightweight, fast Kadence sites and reusable block patterns.' },
-  { title: 'Elementor', text: 'Responsive Elementor pages, templates and landing pages.' },
-  { title: 'WooCommerce', text: 'Store setup, product options, subscriptions and checkout fixes.' },
-  { title: 'SEO', text: 'On-page SEO, image optimization, schema, redirects and indexing.' },
+  {
+    name: 'WordPress websites',
+    line: 'New builds and full rebuilds, from blank theme to launch day.',
+    includes: [
+      'Page design and build for every screen size',
+      'Speed and Core Web Vitals tuning',
+      'Accessibility basics: contrast, keyboard use, alt text',
+      'Moves from Wix, GoDaddy or an old theme, with 301 redirects so you keep your rankings',
+    ],
+    fit: 'You need a new site, or your current one is slow, dated or hard to edit.',
+  },
+  {
+    name: 'Divi',
+    line: 'Theme Builder templates and layouts that match your design closely.',
+    includes: [
+      'Global header, footer and post templates',
+      'Reusable library sections for new pages',
+      'Custom CSS where Divi modules fall short',
+      'Layouts delivered as Divi JSON files you can import',
+    ],
+    fit: 'Your site runs on Divi, or your designer works in it.',
+  },
+  {
+    name: 'Kadence',
+    line: 'Lightweight block-based sites that load fast and stay easy to edit.',
+    includes: [
+      'Kadence Blocks layouts and patterns',
+      'Custom HTML sections sharing one stylesheet',
+      'Patterns you can reuse when you add pages',
+      'Child theme setup and cleanup of stray CSS',
+    ],
+    fit: 'You want speed, and you plan to edit pages yourself in the block editor.',
+  },
+  {
+    name: 'Elementor',
+    line: 'Responsive pages and templates, built cleanly without the bloat.',
+    includes: [
+      'Landing pages and full sites',
+      'Theme templates, popups and forms',
+      'Mobile and tablet layouts checked one by one',
+      'Cleanup of slow or broken Elementor pages',
+    ],
+    fit: 'Your team already knows Elementor and wants pages that stay tidy.',
+  },
+  {
+    name: 'WooCommerce',
+    line: 'Stores that are easy to shop and easy to run.',
+    includes: [
+      'Store setup, products, shipping and tax',
+      'Product options, add-ons and order tables',
+      'Subscriptions and recurring payments',
+      'Custom plugins when a paid add-on does not fit',
+    ],
+    fit: 'You sell online, or your checkout and product pages need fixing.',
+  },
+  {
+    name: 'SEO',
+    line: 'The technical and on-page work that helps the right people find you.',
+    includes: [
+      'Titles, meta descriptions and heading structure',
+      'Image compression, file names and alt text',
+      'Schema markup, FAQs, sitemaps and redirects',
+      'Google Search Console setup and indexing',
+      'Local service-area landing pages',
+    ],
+    fit: 'People can not find you on Google, or a redesign put your rankings at risk.',
+  },
+  {
+    name: 'Landing pages and forms',
+    line: 'Pages built to turn visitors into enquiries.',
+    includes: [
+      'Campaign and seasonal promo pages',
+      'Lead forms in Fluent Forms or WS Form',
+      'Notification emails and thank-you pages',
+      'Form routing so every lead reaches the right inbox',
+    ],
+    fit: 'You run ads or offers and need a page that converts.',
+  },
+  {
+    name: 'Custom code',
+    line: 'Small plugins, shortcodes and fixes when no plugin does the job.',
+    includes: [
+      'Custom post types and shortcodes',
+      'Standalone plugins that replace heavy paid ones',
+      'PHP, JavaScript and CSS fixes',
+      'Child theme migrations',
+    ],
+    fit: 'You have hit the limit of what your theme or plugins can do.',
+  },
 ];
 
-const projects = [
-  {
-    client: 'Clayton',
-    title: 'Clayton Project',
-    text: 'WordPress design and development, landing pages and ongoing SEO work.',
-    tags: ['WordPress', 'Landing pages', 'SEO'],
-  },
+const steps = [
+  { cut: 'Rough', name: 'Discover', text: 'We talk through your goals, pages and content. I review your current site and send a clear quote and timeline.' },
+  { cut: 'Cut', name: 'Design', text: 'I shape the layout and look as a mockup you can click through. Nothing gets built until you are happy with it.' },
+  { cut: 'Polish', name: 'Build', text: 'I build it in WordPress, test it on phones, tablets and desktops, and tune speed, forms and SEO.' },
+  { cut: 'Set', name: 'Launch', text: 'I take the site live, set up redirects, Search Console and a sitemap, and show you how to edit it.' },
+  { cut: 'Care', name: 'Support', text: 'Updates, backups, fixes and new pages whenever you need them.' },
+];
+
+const tools = [
+  { group: 'Builders', items: ['WordPress', 'Divi', 'Kadence', 'Elementor', 'Gutenberg'] },
+  { group: 'Commerce and forms', items: ['WooCommerce', 'Fluent Forms', 'WS Form'] },
+  { group: 'Search', items: ['SEOPress', 'Yoast', 'Rank Math', 'Search Console'] },
+  { group: 'Code', items: ['HTML', 'CSS', 'JavaScript', 'PHP', 'Astro'] },
+  { group: 'Workflow', items: ['Figma', 'GitHub', 'Cloudflare'] },
+];
+
+const facets = [
+  ['30,20 8,40 22,40', '#1B2F8F'],
+  ['30,20 22,40 40,40', '#3355E8'],
+  ['30,20 40,40 50,20', '#9DB7FF'],
+  ['50,20 40,40 60,40', '#2445D6'],
+  ['50,20 60,40 70,20', '#5B7CFA'],
+  ['70,20 60,40 78,40', '#1E36A8'],
+  ['70,20 78,40 92,40', '#14246F'],
+  ['8,40 22,40 50,92', '#14246F'],
+  ['22,40 40,40 50,92', '#2445D6'],
+  ['40,40 60,40 50,92', '#7FA2FF'],
+  ['60,40 78,40 50,92', '#1E36A8'],
+  ['78,40 92,40 50,92', '#0F1C5A'],
 ];
 ---
 <Base>
-  <header class="nav wrap">
-    <a href="/" class="logo">Neelam</a>
-    <nav>
-      <a href="#services">Services</a>
-      <a href="#work">Work</a>
-      <a href="#contact" class="btn small">Hire me</a>
-    </nav>
-  </header>
+  <div class="hero">
+    <header class="nav wrap">
+      <a href="/" class="brand" aria-label="Neelam, home"><Mark size={40} light /> <span>Neelam</span></a>
+      <nav aria-label="Main">
+        <a href="#services">Services</a>
+        <a href="#process">Process</a>
+        <a href="#work">Work</a>
+        <a href="#contact" class="nav-cta">Start a project</a>
+      </nav>
+    </header>
 
-  <section class="hero wrap">
-    <p class="eyebrow">WordPress developer &amp; designer</p>
-    <h1>I build WordPress sites that load fast, rank well and are easy to run.</h1>
-    <p class="lead">Divi, Kadence, Elementor and WooCommerce, from first layout to SEO-ready launch.</p>
-    <div class="cta">
-      <a class="btn" href={`mailto:${email}`}>Email me</a>
-      <a class="btn ghost" href="#work">See my work</a>
-    </div>
+    <section class="hero-body wrap">
+      <div class="hero-text">
+        <p class="status"><span class="dot"></span> Taking on new projects</p>
+        <h1>Websites cut, polished and set by hand.</h1>
+        <p class="hero-lead">I'm Neelam, a WordPress developer and designer. I build fast, search-ready sites on Divi, Kadence, Elementor and WooCommerce, and I look after them once they're live.</p>
+        <div class="hero-actions">
+          <a class="btn btn-light" href="#contact">Start a project</a>
+          <a class="btn btn-ghost" href="#services">See services</a>
+        </div>
+      </div>
+
+      <div class="gem-stage" id="gem" aria-hidden="true">
+        <div class="gem-glow"></div>
+        <svg class="gem" viewBox="0 0 200 160">
+          <defs>
+            <linearGradient id="glint" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#fff" stop-opacity="0" />
+              <stop offset=".5" stop-color="#fff" stop-opacity=".75" />
+              <stop offset="1" stop-color="#fff" stop-opacity="0" />
+            </linearGradient>
+          </defs>
+          <path class="br br-l" d="M42 30 L14 80 L42 130" />
+          <path class="br br-r" d="M158 30 L186 80 L158 130" />
+          <svg x="40" y="10" width="120" height="120" viewBox="0 0 100 100" overflow="visible">
+            <g class="facets">
+              {facets.map(([p, c], i) => (
+                <polygon points={p} fill={c} style={`--i:${i}`} />
+              ))}
+            </g>
+            <g clip-path="url(#gc2)">
+              <rect class="glint" x="-60" y="0" width="40" height="100" fill="url(#glint)" transform="skewX(-20)" />
+            </g>
+            <clipPath id="gc2"><polygon points="30,20 70,20 92,40 50,92 8,40" /></clipPath>
+          </svg>
+        </svg>
+      </div>
+    </section>
+  </div>
+
+  <section class="meaning wrap" aria-labelledby="meaning-title">
+    <h2 id="meaning-title" class="sr-only">About the name</h2>
+    <p class="meaning-big">In Hindi, <em>neelam</em> means sapphire. A sapphire only shows its colour once it has been cut, polished and set. I build websites the same way: shaped around your business, finished with care, and made to last.</p>
   </section>
 
-  <section id="services" class="wrap block">
-    <h2>Services</h2>
-    <div class="grid">
-      {services.map((s) => (
-        <article class="card">
-          <h3>{s.title}</h3>
-          <p>{s.text}</p>
-        </article>
+  <section id="services" class="services wrap" aria-labelledby="services-title">
+    <div class="section-head">
+      <h2 id="services-title">What I build</h2>
+      <p>Choose a service to see what's included.</p>
+    </div>
+    <div class="svc-list">
+      {services.map((s, i) => (
+        <details class="svc" open={i === 0}>
+          <summary>
+            <span class="svc-name">{s.name}</span>
+            <span class="svc-line">{s.line}</span>
+            <span class="svc-toggle" aria-hidden="true"></span>
+          </summary>
+          <div class="svc-body">
+            <div>
+              <h3>What's included</h3>
+              <ul>{s.includes.map((x) => <li>{x}</li>)}</ul>
+            </div>
+            <div class="svc-fit">
+              <h3>A good fit if</h3>
+              <p>{s.fit}</p>
+            </div>
+          </div>
+        </details>
       ))}
     </div>
   </section>
 
-  <section id="work" class="wrap block">
-    <h2>Selected work</h2>
-    <div class="grid">
-      {projects.map((p) => (
-        <article class="card project">
-          <p class="eyebrow">{p.client}</p>
-          <h3>{p.title}</h3>
-          <p>{p.text}</p>
-          <ul class="tags">{p.tags.map((t) => <li>{t}</li>)}</ul>
-        </article>
-      ))}
+  <section id="process" class="process" aria-labelledby="process-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="process-title">From rough stone to finished site</h2>
+        <p>Every project follows the same five steps, so you always know what happens next.</p>
+      </div>
+      <ol class="steps">
+        {steps.map((s, i) => (
+          <li class="step">
+            <svg class="step-gem" viewBox="0 0 100 100" aria-hidden="true">
+              {facets.slice(0, (i + 1) * 2 + 2).map(([p, c]) => <polygon points={p} fill={c} />)}
+              <polygon points="30,20 70,20 92,40 50,92 8,40" fill="none" stroke="#7FA2FF" stroke-width="1.5" stroke-dasharray={i === 4 ? '0' : '3 3'} />
+            </svg>
+            <p class="step-cut">{i + 1}. {s.cut}</p>
+            <h3>{s.name}</h3>
+            <p>{s.text}</p>
+          </li>
+        ))}
+      </ol>
     </div>
   </section>
 
-  <section id="contact" class="wrap block contact">
-    <h2>Have a project in mind?</h2>
-    <p class="lead">Tell me what you need and I'll get back to you.</p>
-    <a class="btn" href={`mailto:${email}`}>{email}</a>
+  <section id="work" class="work wrap" aria-labelledby="work-title">
+    <div class="section-head">
+      <h2 id="work-title">Selected work</h2>
+      <p>Client work I'm able to share.</p>
+    </div>
+    <article class="case">
+      <div class="case-text">
+        <h3>Clayton</h3>
+        <p class="case-role">Ongoing WordPress development partner</p>
+        <p>I work with Clayton as the developer behind his websites. Briefs come in, and I turn them into finished, live work: new pages, store features, fixes and content, built to his standards and delivered on schedule.</p>
+        <h4>What I handle</h4>
+        <ul class="case-list">
+          <li>Landing pages and thank-you pages</li>
+          <li>Lead forms and email notifications</li>
+          <li>Divi and Kadence builds and rebuilds</li>
+          <li>Custom WooCommerce plugins</li>
+          <li>Blog and project posts with optimized images</li>
+          <li>SEO fixes and Search Console</li>
+        </ul>
+      </div>
+      <div class="case-visual" aria-hidden="true">
+        <div class="browser">
+          <div class="browser-bar"><span></span><span></span><span></span></div>
+          <div class="browser-page">
+            <div class="bp-hero"><i></i><i class="short"></i><b></b></div>
+            <div class="bp-grid"><i></i><i></i><i></i></div>
+            <div class="bp-form"><i></i><i></i><b></b></div>
+          </div>
+        </div>
+        <div class="phone">
+          <div class="bp-hero"><i></i><i class="short"></i><b></b></div>
+          <div class="bp-grid one"><i></i><i></i></div>
+        </div>
+      </div>
+    </article>
   </section>
 
-  <footer class="wrap foot">
-    <p>© {new Date().getFullYear()} Neelam. Built with Astro, hosted on Cloudflare.</p>
-  </footer>
+  <section class="promises wrap" aria-labelledby="promises-title">
+    <h2 id="promises-title">Working with me</h2>
+    <div class="promise-grid">
+      <div>
+        <h3>A clear quote first</h3>
+        <p>You get the scope, price and timeline in writing before any work starts.</p>
+      </div>
+      <div>
+        <h3>Progress you can see</h3>
+        <p>You'll see the site as it takes shape, not just on launch day.</p>
+      </div>
+      <div>
+        <h3>Everything stays yours</h3>
+        <p>Your domain, hosting, logins and files stay in your name.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="tools wrap" aria-labelledby="tools-title">
+    <h2 id="tools-title">Tools I use every day</h2>
+    <dl class="tool-groups">
+      {tools.map((t) => (
+        <div>
+          <dt>{t.group}</dt>
+          <dd><ul>{t.items.map((x) => <li>{x}</li>)}</ul></dd>
+        </div>
+      ))}
+    </dl>
+  </section>
+
+  <section id="contact" class="contact" aria-labelledby="contact-title">
+    <div class="wrap contact-inner">
+      <Mark size={64} light />
+      <h2 id="contact-title">Tell me about your project.</h2>
+      <p>Send a few lines about your business and what you need. I'll reply with questions or a quote.</p>
+      <div class="email-row">
+        <a class="email" href={`mailto:${email}`}>{email}</a>
+        <button class="copy" type="button" data-copy={email}>Copy email</button>
+      </div>
+    </div>
+    <footer class="wrap foot">
+      <p>© {new Date().getFullYear()} Neelam</p>
+      <p>Built with Astro, hosted on Cloudflare</p>
+    </footer>
+  </section>
 </Base>
 
+<script>
+  const stage = document.getElementById('gem');
+  const fine = window.matchMedia('(pointer: fine)').matches;
+  const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (stage && fine && !still) {
+    window.addEventListener('pointermove', (e) => {
+      const x = e.clientX / window.innerWidth - 0.5;
+      const y = e.clientY / window.innerHeight - 0.5;
+      stage.style.setProperty('--rx', `${(-y * 14).toFixed(2)}deg`);
+      stage.style.setProperty('--ry', `${(x * 18).toFixed(2)}deg`);
+    });
+  }
+  if (stage) {
+    stage.addEventListener('pointerenter', () => {
+      stage.classList.remove('shine');
+      void stage.offsetWidth;
+      stage.classList.add('shine');
+    });
+  }
+  document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(btn.dataset.copy || '');
+        btn.textContent = 'Copied';
+      } catch {
+        btn.textContent = 'Select and copy the address';
+      }
+      setTimeout(() => (btn.textContent = 'Copy email'), 2200);
+    });
+  });
+</script>
+
 <style>
-  .nav { display: flex; justify-content: space-between; align-items: center; padding-top: 24px; padding-bottom: 24px; }
-  .logo { font-family: 'Fraunces', serif; font-weight: 700; font-size: 24px; text-decoration: none; }
-  nav { display: flex; gap: 20px; align-items: center; }
-  nav a { text-decoration: none; color: var(--muted); font-weight: 500; }
-  nav a:hover { color: var(--ink); }
-  .hero { padding-top: 72px; padding-bottom: 88px; }
-  .hero h1 { font-size: clamp(38px, 6vw, 68px); max-width: 15ch; }
-  .eyebrow { color: var(--accent); font-weight: 600; font-size: 14px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 14px; }
-  .lead { color: var(--muted); font-size: 20px; max-width: 46ch; margin-top: 20px; }
-  .cta { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
-  .btn { display: inline-block; background: var(--accent); color: #fff !important; padding: 14px 24px; border-radius: 999px; text-decoration: none; font-weight: 600; border: 2px solid var(--accent); }
-  .btn:hover { filter: brightness(1.08); }
-  .btn.ghost { background: transparent; color: var(--ink) !important; border-color: var(--line); }
-  .btn.small { padding: 8px 16px; font-size: 15px; }
-  .block { padding-top: 64px; padding-bottom: 64px; border-top: 1px solid var(--line); }
-  .block h2 { font-size: clamp(30px, 4vw, 44px); margin-bottom: 32px; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-  .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 28px; }
-  .card h3 { font-size: 22px; margin-bottom: 10px; }
-  .card p { color: var(--muted); }
-  .tags { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
-  .tags li { font-size: 13px; background: var(--bg); border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; }
-  .contact { text-align: center; }
-  .contact .lead { margin: 0 auto 28px; }
-  .foot { padding-top: 32px; padding-bottom: 40px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); }
-  @media (max-width: 560px) { nav a:not(.btn) { display: none; } .hero { padding-top: 40px; } }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* Hero */
+  .hero {
+    background: radial-gradient(1200px 600px at 75% 45%, #1d3488 0%, rgba(14,26,61,0) 60%), var(--night);
+    color: var(--paper);
+    padding-bottom: clamp(48px, 8vw, 96px);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: ''; position: absolute; inset: auto 0 0 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(127,162,255,.5), transparent);
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; padding-block: 22px; gap: 16px; }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--display); font-size: 1.5rem; }
+  .nav nav { display: flex; align-items: center; gap: clamp(14px, 2.6vw, 30px); }
+  .nav nav a { text-decoration: none; color: #C3CCEA; font-weight: 500; }
+  .nav nav a:hover { color: #fff; }
+  .nav nav .nav-cta { color: var(--night); background: var(--paper); padding: 9px 18px; border-radius: 999px; }
+  .nav nav .nav-cta:hover { color: var(--night); background: #fff; }
+
+  .hero-body { display: grid; grid-template-columns: 1.1fr 0.9fr; align-items: center; gap: 32px; padding-top: clamp(24px, 5vw, 64px); }
+  .status { display: inline-flex; align-items: center; gap: 10px; font-size: .95rem; color: #C3CCEA; border: 1px solid rgba(195,204,234,.25); padding: 6px 14px; border-radius: 999px; margin-bottom: 28px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #5EE0A0; box-shadow: 0 0 0 4px rgba(94,224,160,.18); }
+  .hero h1 { font-size: clamp(3rem, 7.4vw, 6.4rem); max-width: 11ch; }
+  .hero-lead { font-size: clamp(1.1rem, 1.6vw, 1.3rem); color: #C3CCEA; max-width: 34em; margin-top: 28px; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+  .btn { display: inline-block; padding: 15px 26px; border-radius: 999px; font-weight: 600; text-decoration: none; transition: transform .2s ease, background .2s ease; }
+  .btn:active { transform: translateY(1px); }
+  .btn-light { background: var(--paper); color: var(--night); }
+  .btn-light:hover { background: #fff; }
+  .btn-ghost { color: var(--paper); box-shadow: inset 0 0 0 1.5px rgba(195,204,234,.45); }
+  .btn-ghost:hover { box-shadow: inset 0 0 0 1.5px var(--paper); }
+
+  /* Gem */
+  .gem-stage { position: relative; perspective: 900px; aspect-ratio: 5 / 4; }
+  .gem-glow { position: absolute; inset: 12% 18%; border-radius: 50%; background: radial-gradient(circle, rgba(91,124,250,.55), transparent 65%); filter: blur(30px); animation: glow 1.4s ease-out both; }
+  .gem { position: relative; width: 100%; height: 100%; overflow: visible; transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .4s cubic-bezier(.2,.7,.2,1); }
+  .br { fill: none; stroke: var(--paper); stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 120; stroke-dashoffset: 120; animation: draw .9s cubic-bezier(.6,0,.2,1) .1s forwards; }
+  .br-r { animation-delay: .25s; }
+  .facets polygon { stroke: #0E1A3D; stroke-width: .6; stroke-linejoin: round; opacity: 0; transform-box: fill-box; transform-origin: center; animation: facet .55s cubic-bezier(.2,.8,.2,1) forwards; animation-delay: calc(.55s + var(--i) * 70ms); }
+  .glint { opacity: 0; animation: glint 1.1s ease-in-out 1.75s forwards; }
+  .gem-stage.shine .glint { animation: glint 1s ease-in-out forwards; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  @keyframes facet { from { opacity: 0; transform: scale(.6) translateY(-6px); } to { opacity: 1; transform: none; } }
+  @keyframes glint { 0% { opacity: 1; x: -60px; } 100% { opacity: 1; x: 140px; } }
+  @keyframes glow { from { opacity: 0; transform: scale(.6); } to { opacity: 1; transform: none; } }
+
+  /* Meaning */
+  .meaning { padding-block: clamp(72px, 11vw, 140px); }
+  .meaning-big { font-family: var(--display); font-size: clamp(1.7rem, 3.4vw, 2.75rem); line-height: 1.22; max-width: 30ch; color: var(--ink); }
+  .meaning-big em { color: var(--sapphire); }
+
+  /* Section heads */
+  .section-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; margin-bottom: 36px; }
+  .section-head h2, .promises h2, .tools h2 { font-size: clamp(2.3rem, 5vw, 3.8rem); }
+  .section-head p { color: var(--slate); max-width: 30em; }
+
+  /* Services */
+  .services { padding-bottom: clamp(72px, 10vw, 128px); }
+  .svc-list { border-top: 1.5px solid var(--ink); }
+  .svc { border-bottom: 1px solid var(--rule); }
+  .svc summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: minmax(200px, 1fr) 1.4fr 32px; gap: 24px; align-items: center; padding: 26px 4px; }
+  .svc summary::-webkit-details-marker { display: none; }
+  .svc-name { font-family: var(--display); font-size: clamp(1.6rem, 2.8vw, 2.2rem); line-height: 1.1; transition: color .2s; }
+  .svc-line { color: var(--slate); }
+  .svc summary:hover .svc-name, .svc[open] .svc-name { color: var(--sapphire); }
+  .svc-toggle { width: 32px; height: 32px; border-radius: 50%; border: 1.5px solid var(--rule); position: relative; transition: transform .3s ease, background .3s, border-color .3s; }
+  .svc-toggle::before, .svc-toggle::after { content: ''; position: absolute; left: 50%; top: 50%; width: 12px; height: 1.5px; background: var(--ink); transform: translate(-50%,-50%); }
+  .svc-toggle::after { transform: translate(-50%,-50%) rotate(90deg); transition: opacity .2s; }
+  .svc[open] .svc-toggle { background: var(--sapphire); border-color: var(--sapphire); transform: rotate(180deg); }
+  .svc[open] .svc-toggle::before { background: #fff; }
+  .svc[open] .svc-toggle::after { opacity: 0; }
+  .svc-body { display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; padding: 0 4px 34px; animation: open .35s ease; }
+  @keyframes open { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+  .svc-body h3 { font-family: var(--body); font-weight: 600; font-size: 1rem; letter-spacing: 0; margin-bottom: 12px; }
+  .svc-body ul { padding: 0; list-style: none; display: grid; gap: 10px; }
+  .svc-body li { padding-left: 22px; position: relative; }
+  .svc-body li::before { content: ''; position: absolute; left: 2px; top: .55em; width: 9px; height: 9px; background: var(--sapphire); clip-path: polygon(50% 0, 100% 40%, 50% 100%, 0 40%); }
+  .svc-fit { background: #E6EBFA; border-radius: 18px; padding: 24px; align-self: start; }
+  .svc-fit p { color: var(--ink); }
+
+  /* Process */
+  .process { background: var(--night); color: var(--paper); padding-block: clamp(72px, 10vw, 128px); }
+  .process .section-head p { color: #C3CCEA; }
+  .steps { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; counter-reset: s; }
+  .step { padding: 28px 22px 8px; border-left: 1px solid rgba(195,204,234,.18); }
+  .step:first-child { border-left: 0; padding-left: 0; }
+  .step-gem { width: 64px; height: 64px; margin-bottom: 22px; }
+  .step-cut { color: var(--facet); font-weight: 600; font-size: .95rem; }
+  .step h3 { font-size: 1.9rem; margin: 6px 0 12px; }
+  .step p:last-child { color: #C3CCEA; font-size: .98rem; }
+
+  /* Work */
+  .work { padding-block: clamp(72px, 10vw, 128px); }
+  .case { display: grid; grid-template-columns: 1fr 1.05fr; gap: clamp(28px, 5vw, 64px); align-items: center; background: #fff; border: 1px solid var(--rule); border-radius: 28px; padding: clamp(24px, 4vw, 52px); }
+  .case h3 { font-size: clamp(2.4rem, 4.4vw, 3.4rem); }
+  .case-role { color: var(--sapphire); font-weight: 600; margin: 8px 0 18px; }
+  .case-text > p:not(.case-role) { color: var(--slate); }
+  .case h4 { margin: 26px 0 12px; font-size: 1rem; font-weight: 600; }
+  .case-list { padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+  .case-list li { background: var(--paper); border: 1px solid var(--rule); border-radius: 999px; padding: 6px 14px; font-size: .95rem; }
+  .case-visual { position: relative; padding: 8% 10% 12% 0; }
+  .browser { background: var(--night); border-radius: 16px; overflow: hidden; box-shadow: 0 30px 60px -30px rgba(14,26,61,.55); transform: rotate(-2deg); transition: transform .5s cubic-bezier(.2,.7,.2,1); }
+  .case:hover .browser { transform: rotate(0deg) translateY(-4px); }
+  .browser-bar { display: flex; gap: 6px; padding: 12px 14px; background: var(--night-2); }
+  .browser-bar span { width: 10px; height: 10px; border-radius: 50%; background: rgba(195,204,234,.35); }
+  .browser-page { padding: 22px; display: grid; gap: 16px; }
+  .bp-hero, .bp-form { display: grid; gap: 9px; }
+  .bp-hero i, .bp-form i { display: block; height: 12px; border-radius: 6px; background: rgba(195,204,234,.28); }
+  .bp-hero i:first-child { height: 20px; width: 80%; background: rgba(243,245,251,.85); }
+  .bp-hero i.short { width: 55%; }
+  .bp-hero b, .bp-form b { display: block; width: 110px; height: 28px; border-radius: 999px; background: var(--facet); }
+  .bp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .bp-grid i { height: 64px; border-radius: 10px; background: linear-gradient(135deg, #2445D6, #14246F); }
+  .bp-grid.one { grid-template-columns: 1fr; }
+  .bp-grid.one i { height: 40px; }
+  .bp-form { background: rgba(127,162,255,.12); border-radius: 12px; padding: 14px; }
+  .phone { position: absolute; right: 0; bottom: 0; width: 34%; background: var(--night); border: 5px solid #fff; border-radius: 22px; padding: 18px 12px; display: grid; gap: 12px; box-shadow: 0 24px 50px -24px rgba(14,26,61,.6); transform: rotate(4deg); transition: transform .5s cubic-bezier(.2,.7,.2,1); }
+  .case:hover .phone { transform: rotate(0deg) translateY(-8px); }
+  .phone .bp-hero b { width: 70%; height: 22px; }
+
+  /* Promises */
+  .promises { padding-bottom: clamp(72px, 10vw, 128px); }
+  .promise-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 4vw, 48px); margin-top: 36px; border-top: 1.5px solid var(--ink); padding-top: 28px; }
+  .promise-grid h3 { font-size: 1.6rem; margin-bottom: 10px; }
+  .promise-grid p { color: var(--slate); }
+
+  /* Tools */
+  .tools { padding-bottom: clamp(72px, 10vw, 128px); }
+  .tool-groups { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; margin-top: 36px; }
+  .tool-groups dt { font-weight: 600; margin-bottom: 12px; color: var(--sapphire); }
+  .tool-groups dd ul { padding: 0; list-style: none; display: grid; gap: 6px; }
+  .tool-groups dd li { font-size: 1.05rem; }
+
+  /* Contact */
+  .contact { background: radial-gradient(900px 500px at 50% 0%, #1d3488 0%, rgba(14,26,61,0) 70%), var(--night); color: var(--paper); padding-top: clamp(80px, 11vw, 140px); }
+  .contact-inner { display: grid; justify-items: center; text-align: center; gap: 22px; padding-bottom: clamp(64px, 9vw, 110px); }
+  .contact h2 { font-size: clamp(2.6rem, 6.6vw, 5.4rem); max-width: 13ch; }
+  .contact-inner > p { color: #C3CCEA; max-width: 34em; }
+  .email-row { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 14px; margin-top: 10px; }
+  .email { font-family: var(--display); font-size: clamp(1.4rem, 3.6vw, 2.4rem); text-decoration-color: rgba(127,162,255,.6); text-underline-offset: 8px; text-decoration-thickness: 2px; overflow-wrap: anywhere; }
+  .email:hover { text-decoration-color: var(--facet); }
+  .copy { font: 600 .95rem var(--body); color: var(--paper); background: transparent; border: 1.5px solid rgba(195,204,234,.45); border-radius: 999px; padding: 10px 18px; cursor: pointer; }
+  .copy:hover { border-color: var(--paper); }
+  .foot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; border-top: 1px solid rgba(195,204,234,.18); padding-block: 26px 34px; color: #8F9AC4; font-size: .95rem; }
+
+  /* Responsive */
+  @media (max-width: 960px) {
+    .hero-body { grid-template-columns: 1fr; }
+    .gem-stage { max-width: 440px; width: 100%; justify-self: center; order: -1; margin-bottom: -10px; }
+    .steps { grid-template-columns: 1fr 1fr; }
+    .step, .step:first-child { border-left: 0; padding: 22px 0; border-top: 1px solid rgba(195,204,234,.18); }
+    .case { grid-template-columns: 1fr; }
+    .tool-groups { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .nav nav a:not(.nav-cta) { display: none; }
+    .svc summary { grid-template-columns: 1fr 32px; }
+    .svc-line { grid-column: 1; grid-row: 2; }
+    .svc-toggle { grid-column: 2; grid-row: 1; }
+    .svc-body { grid-template-columns: 1fr; gap: 20px; }
+    .steps { grid-template-columns: 1fr; }
+    .promise-grid { grid-template-columns: 1fr; }
+    .tool-groups { grid-template-columns: 1fr 1fr; }
+  }
 </style>
